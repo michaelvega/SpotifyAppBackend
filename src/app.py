@@ -1,17 +1,15 @@
 from flask import Flask, jsonify
+from utils import get_auth_header
+from guessing_game import games
 import requests
 
 app = Flask(__name__)
-
-
-def getAuthHeader(token):
-    return {"Authorization": "Bearer " + token}
-
+app.register_blueprint(games, url_prefix="/api")
 
 @app.route('/api/userInfo/<token>', methods=['GET'])
 def get_playlists(token):
     url = "https://api.spotify.com/v1/me"
-    headers = getAuthHeader(token)
+    headers = get_auth_header(token)
 
     response = requests.get(url, headers=headers)
 
