@@ -2,11 +2,13 @@ from flask import Flask, jsonify
 from utils import get_auth_header
 from top_items import top
 from pkce_backend_auth import pkce_auth
+from long_lasting_auth import long_auth
 import requests
 
 app = Flask(__name__)
 app.register_blueprint(top, url_prefix="/api")
 app.register_blueprint(pkce_auth, url_prefix="/api/pkce")
+app.register_blueprint(long_auth, url_prefix="/api/long_auth")
 
 
 @app.route('/api/userInfo/<token>', methods=['GET'])

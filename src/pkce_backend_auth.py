@@ -1,3 +1,9 @@
+"""
+Use this if we CANNOT preserve details after first authentication securely.
+
+We need to login every time and get a new token.
+"""
+
 import pkce
 from urllib.parse import urlencode
 from flask import Blueprint, request

@@ -1,5 +1,7 @@
 """
 Get top artist + song
+
+In the tester, token is currently left blank. This token can be obtained by running long_lasting_auth
 """
 from flask import jsonify, Blueprint
 from utils import get_auth_header
@@ -8,8 +10,6 @@ import requests
 top = Blueprint('top', __name__, )
 """
 Need to decide whether to send request to spotify API or to Firebase for this.
-
-Need PKCE Flow to get the right token: https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 
 API docs for top artist/song: https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
 
@@ -32,7 +32,7 @@ def get_top_items(token, type):
     if response.status_code == 200:
         data = response.json()
         # Extract and return top songs
-        return jsonify(data)
+        print(data)
     else:
         # Print error message if request fails
         print(f"Failed to get user info: {response.text}")
@@ -50,6 +50,6 @@ def get_top_artists(token):
 
 
 if __name__ == '__main__':
-    token = ""
+    token = ''
     get_top_songs(token)
     get_top_artists(token)
