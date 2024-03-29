@@ -3,7 +3,7 @@ Use this if we can store client secret.
 
 client_secret is left as blank in order to push to github; we should get it from some secure storage, instead of hard coding it in.
 
-Token is printed in callback() - should be stored in the future.
+Token is printed in callback() - should be stored in the future. Probably can be returned so Android app can store it when the endpoint is called.
 
 In request_authorization(), modify scope according to what permissions are needed; reference below
 https://developer.spotify.com/documentation/web-api/concepts/scopes
@@ -16,7 +16,7 @@ import requests
 long_auth = Blueprint('long_auth', __name__, )
 
 client_id = '7124ee1288704e86ae5f719c1c308a96'
-client_secret = ''
+client_secret = 'c1c9827b815949de817ad768085dc001'
 redirect_uri = 'http://localhost:5001/api/long_auth/'
 
 
@@ -38,6 +38,7 @@ def encode_to_base64(id, secret):
 """
 GET request to the /authorize endpoint
 """
+@long_auth.route('/request_auth', methods=['GET'])
 def request_authorization():
     request_url = 'https://accounts.spotify.com/authorize'
     scope = 'user-read-private user-read-email user-top-read'
@@ -73,8 +74,8 @@ def callback():
     }
 
     response = requests.post(request_url, params=params, headers=headers)
-    print(response.json()['access_token'])
-    return "Success"
+
+    return response.json()['access_token']
 
 
 if __name__ == '__main__':

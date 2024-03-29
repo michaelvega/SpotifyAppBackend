@@ -2,6 +2,9 @@
 Get top artist + song
 
 In the tester, token is currently left blank. This token can be obtained by running long_lasting_auth
+
+In the Android App, token should be stored after API call to long_lasting_auth.
+So the endpoints can be called by just appending that token to the url instead of <token>.
 """
 from flask import jsonify, Blueprint
 from utils import get_auth_header
