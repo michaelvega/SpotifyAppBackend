@@ -1,15 +1,11 @@
 """
-Game to be embedded into wrapped.
-
-Guess most listened to artist and song.
-
-Guess the artist that appeared in the most playlists.
+Get top artist + song
 """
 from flask import jsonify, Blueprint
 from utils import get_auth_header
 import requests
 
-games = Blueprint('games', __name__, )
+top = Blueprint('top', __name__, )
 """
 Need to decide whether to send request to spotify API or to Firebase for this.
 
@@ -43,12 +39,12 @@ def get_top_items(token, type):
         return None
 
 
-@games.route('/guessing/songs/<token>', methods=['GET'])
+@top.route('/top/songs/<token>', methods=['GET'])
 def get_top_songs(token):
     get_top_items(token, "tracks")
 
 
-@games.route('/guessing/artists/<token>', methods=['GET'])
+@top.route('/top/artists/<token>', methods=['GET'])
 def get_top_artists(token):
     get_top_items(token, "artists")
 
