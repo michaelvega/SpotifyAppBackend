@@ -16,7 +16,7 @@ import requests
 long_auth = Blueprint('long_auth', __name__, )
 
 client_id = '7124ee1288704e86ae5f719c1c308a96'
-client_secret = 'c1c9827b815949de817ad768085dc001'
+client_secret = ''
 redirect_uri = 'http://localhost:5001/api/long_auth/'
 
 
