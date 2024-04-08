@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
 import requests
+from llm import llm_api
 
 app = Flask(__name__)
+app.register_blueprint(llm_api, url_prefix="/api/llm")
 
 def getAuthHeader(token):
     return {"Authorization" : "Bearer " + token}
